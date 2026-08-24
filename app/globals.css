@@ -143,4 +143,13 @@
     break-inside: avoid;
     box-shadow: none !important;
   }
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 12mm;
 }

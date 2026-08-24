@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Castle } from "lucide-react";
 
 const links = [
@@ -9,6 +12,9 @@ const links = [
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/pdf")) return null;
+
   return (
     <header className="no-print sticky top-0 z-40 border-b border-stone-200/80 bg-[color-mix(in_oklch,var(--background),white_40%)]/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">

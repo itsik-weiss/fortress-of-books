@@ -1,21 +1,15 @@
-import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { PdfCover } from "@/components/print/pdf-cover";
 
-export default function TeacherPage() {
+export function LessonPlanDocument() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
-      <p className="text-sm font-semibold text-teal-800">למורה</p>
-      <h1 className="mt-1 font-heading text-3xl font-bold">
-        מערך שיעור · מבצר המספרים
-      </h1>
-      <p className="mt-3 leading-8 text-stone-700">
-        שיעור חקר לכיתות ג׳–ד׳, כ-45–50 דקות. הכיתה מתחלקת ל-5 קבוצות של 4
-        תלמידים. כל קבוצה עובדת בתחנה צבעונית, מגלה חוקיות, ורק בסוף בודקת מול
-        המפתח.
-      </p>
+    <div className="pdf-doc mx-auto max-w-[210mm] bg-white text-stone-900">
+      <PdfCover
+        kicker="למורה"
+        title="מערך שיעור · מבצר המספרים"
+        subtitle="שיעור חקר לכיתות ג׳–ד׳, כ-45–50 דקות. 5 קבוצות של 4 תלמידים, שתי טבלאות קסם, וגילוי עצמאי של החוקים."
+      />
 
-      <section className="mt-8 rounded-3xl border border-stone-200 bg-white p-6">
+      <section className="print-card mb-5 break-inside-avoid rounded-3xl border border-stone-200 p-6">
         <h2 className="font-heading text-xl font-bold">מטרות</h2>
         <ul className="mt-3 list-disc space-y-2 pe-5 leading-7 text-stone-700">
           <li>להבחין בין ערך הספרה לבין ערך המיקום שלה במספר.</li>
@@ -27,13 +21,11 @@ export default function TeacherPage() {
             להסיק את חוקי הכפל: זוגי אחד במכפלה מספיק לתוצאה זוגית; רק
             אי-זוגי×אי-זוגי נשאר אי-זוגי.
           </li>
-          <li>
-            להסביר מדוע ספרת האחדות קובעת אם מספר שלם הוא זוגי או אי-זוגי.
-          </li>
+          <li>להסביר מדוע ספרת האחדות קובעת אם מספר שלם הוא זוגי או אי-זוגי.</li>
         </ul>
       </section>
 
-      <section className="mt-6 rounded-3xl border border-stone-200 bg-white p-6">
+      <section className="print-card mb-5 break-inside-avoid rounded-3xl border border-stone-200 p-6">
         <h2 className="font-heading text-xl font-bold">מה מכינים</h2>
         <ul className="mt-3 list-disc space-y-2 pe-5 leading-7 text-stone-700">
           <li>5 ערכות כרטיסיות לפי צבע התחנה (או טאבלט/מחשב לכל קבוצה).</li>
@@ -43,7 +35,7 @@ export default function TeacherPage() {
         </ul>
       </section>
 
-      <section className="mt-6 rounded-3xl border border-stone-200 bg-white p-6">
+      <section className="print-card mb-5 break-inside-avoid rounded-3xl border border-stone-200 p-6">
         <h2 className="font-heading text-xl font-bold">מהלך השיעור</h2>
         <ol className="mt-3 space-y-4">
           {[
@@ -72,9 +64,9 @@ export default function TeacherPage() {
         </ol>
       </section>
 
-      <section className="mt-6 overflow-x-auto rounded-3xl border border-stone-200 bg-white p-6">
+      <section className="print-card mb-5 break-inside-avoid rounded-3xl border border-stone-200 p-6">
         <h2 className="font-heading text-xl font-bold">סיבוב התחנות</h2>
-        <table className="mt-4 w-full min-w-[520px] text-right text-sm">
+        <table className="mt-4 w-full text-right text-sm">
           <thead>
             <tr className="border-b text-stone-500">
               <th className="py-2">סבב</th>
@@ -109,7 +101,7 @@ export default function TeacherPage() {
         </p>
       </section>
 
-      <section className="mt-6 rounded-3xl border border-stone-200 bg-white p-6">
+      <section className="print-card break-inside-avoid rounded-3xl border border-stone-200 p-6">
         <h2 className="font-heading text-xl font-bold">טיפים להנחיה</h2>
         <ul className="mt-3 list-disc space-y-2 pe-5 leading-7 text-stone-700">
           <li>אל תתקנו מסקנה שגויה מיד. בקשו דוגמה רביעית.</li>
@@ -118,18 +110,6 @@ export default function TeacherPage() {
           <li>במליאה חזרו על מודל הגרביים: שני בודדים נפגשים והופכים לזוג.</li>
         </ul>
       </section>
-
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link href="/stations" className={cn(buttonVariants({ size: "lg" }))}>
-          לפתיחת התחנות
-        </Link>
-        <Link
-          href="/print"
-          className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
-        >
-          להורדת PDF
-        </Link>
-      </div>
     </div>
   );
 }

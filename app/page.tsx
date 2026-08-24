@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookOpen, Printer, Users } from "lucide-react";
+import { PdfDownloads } from "@/components/pdf-downloads";
 import { buttonVariants } from "@/components/ui/button";
 import { StationPreview } from "@/components/station-preview";
 import { cards, stations } from "@/lib/cards";
@@ -39,7 +40,7 @@ export default function HomePage() {
               className={cn(buttonVariants({ variant: "secondary", size: "lg" }))}
             >
               <Printer data-icon="inline-start" />
-              הדפסה לכיתה
+              הורדת PDF
             </Link>
           </div>
         </div>
@@ -70,6 +71,16 @@ export default function HomePage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 pb-8">
+        <div className="mb-5">
+          <h2 className="font-heading text-2xl font-bold">קבצי PDF להדפסה</h2>
+          <p className="mt-1 text-stone-600">
+            כרטיסיות לתלמידים, מפתח למורה, דפי תיעוד ומערך שיעור — מוכנים להורדה.
+          </p>
+        </div>
+        <PdfDownloads />
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-16">
