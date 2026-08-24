@@ -149,6 +149,10 @@
   }
 }
 
+body:has(.pdf-root) header {
+  display: none !important;
+}
+
 @page {
   size: A4;
   margin: 12mm;

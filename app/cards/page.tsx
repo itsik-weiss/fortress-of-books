@@ -1,10 +1,16 @@
 import Link from "next/link";
-import { CardDeck } from "@/components/card-deck";
+import { CardExplorer, parseCardQuery } from "@/components/card-explorer";
 import { buttonVariants } from "@/components/ui/button";
 import { cards } from "@/lib/cards";
 import { cn } from "@/lib/utils";
 
-export default function CardsPage() {
+export default async function CardsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ i?: string; side?: string }>;
+}) {
+  const query = parseCardQuery(await searchParams);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
@@ -14,7 +20,7 @@ export default function CardsPage() {
             חפיסת חקירה דיגיטלית
           </h1>
           <p className="mt-2 max-w-2xl text-stone-600">
-            הפכו כרטיסיה אחרי שהקבוצה ניסחה מסקנה. הרמז עוזר בלי לחשוף את החוק.
+            הציגו תשובה אחרי שהקבוצה ניסחה מסקנה. הרמז עוזר בלי לחשוף את החוק.
           </p>
         </div>
         <Link
@@ -24,7 +30,12 @@ export default function CardsPage() {
           לפי תחנות
         </Link>
       </div>
-      <CardDeck cards={cards} />
+      <CardExplorer
+        cards={cards}
+        index={query.index}
+        showAnswer={query.showAnswer}
+        basePath="/cards"
+      />
     </div>
   );
 }

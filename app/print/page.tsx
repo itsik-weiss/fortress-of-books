@@ -1,12 +1,29 @@
+import Link from "next/link";
 import { PdfDownloads } from "@/components/pdf-downloads";
 import { PrintButton } from "@/components/print-button";
 import { LessonPlanDocument } from "@/components/print/lesson-plan-document";
 import { RecordSheetsDocument } from "@/components/print/record-sheets-document";
 import { StudentCardsDocument } from "@/components/print/student-cards-document";
 import { TeacherKeyDocument } from "@/components/print/teacher-key-document";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-export default function PrintPage() {
+const packs = [
+  { id: "students", label: "כרטיסיות לתלמידים" },
+  { id: "teacher", label: "מפתח למורה" },
+  { id: "sheet", label: "דף תיעוד" },
+  { id: "lesson", label: "מערך שיעור" },
+] as const;
+
+export default async function PrintPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ pack?: string }>;
+}) {
+  const { pack: rawPack } = await searchParams;
+  const pack =
+    packs.find((item) => item.id === rawPack)?.id ?? "students";
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <div className="no-print mb-8">
@@ -22,32 +39,33 @@ export default function PrintPage() {
         <div>
           <h2 className="font-heading text-2xl font-bold">תצוגה להדפסה מהדפדפן</h2>
           <p className="mt-1 text-stone-600">
-            בחרו לשונית ולחצו הדפסה אם אין לכם את קובץ ה-PDF בהישג יד.
+            בחרו ערכה ולחצו הדפסה אם אין לכם את קובץ ה-PDF בהישג יד.
           </p>
         </div>
         <PrintButton />
       </div>
 
-      <Tabs defaultValue="students">
-        <TabsList className="no-print mb-6">
-          <TabsTrigger value="students">כרטיסיות לתלמידים</TabsTrigger>
-          <TabsTrigger value="teacher">מפתח למורה</TabsTrigger>
-          <TabsTrigger value="sheet">דף תיעוד</TabsTrigger>
-          <TabsTrigger value="lesson">מערך שיעור</TabsTrigger>
-        </TabsList>
-        <TabsContent value="students">
-          <StudentCardsDocument />
-        </TabsContent>
-        <TabsContent value="teacher">
-          <TeacherKeyDocument />
-        </TabsContent>
-        <TabsContent value="sheet">
-          <RecordSheetsDocument />
-        </TabsContent>
-        <TabsContent value="lesson">
-          <LessonPlanDocument />
-        </TabsContent>
-      </Tabs>
+      <nav className="no-print mb-6 flex flex-wrap gap-2">
+        {packs.map((item) => (
+          <Link
+            key={item.id}
+            href={`/print?pack=${item.id}`}
+            className={cn(
+              buttonVariants({
+                variant: pack === item.id ? "default" : "outline",
+                size: "lg",
+              }),
+            )}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      {pack === "students" ? <StudentCardsDocument /> : null}
+      {pack === "teacher" ? <TeacherKeyDocument /> : null}
+      {pack === "sheet" ? <RecordSheetsDocument /> : null}
+      {pack === "lesson" ? <LessonPlanDocument /> : null}
     </div>
   );
 }

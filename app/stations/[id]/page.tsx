@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CardDeck } from "@/components/card-deck";
+import { CardExplorer, parseCardQuery } from "@/components/card-explorer";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -16,10 +16,13 @@ export function generateStaticParams() {
 
 export default async function StationPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ i?: string; side?: string }>;
 }) {
   const { id } = await params;
+  const query = parseCardQuery(await searchParams);
   const station = stations.find((item) => item.id === id);
   if (!station) notFound();
 
@@ -51,7 +54,12 @@ export default async function StationPage({
           ציוד: {station.materials.join(" · ")}
         </p>
         <div className="mt-8">
-          <CardDeck cards={pack} />
+          <CardExplorer
+            cards={pack}
+            index={query.index}
+            showAnswer={query.showAnswer}
+            basePath={`/stations/${station.id}`}
+          />
         </div>
         <div className="mt-10 flex justify-center">
           <Link
