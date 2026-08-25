@@ -39,7 +39,7 @@ for (const job of jobs) {
   console.log("printing", url);
   await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 });
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForFunction(() => !document.querySelector("header"));
+  await page.waitForSelector(".pdf-root, .pdf-doc", { timeout: 15000 });
   await new Promise((r) => setTimeout(r, 400));
   const dest = path.join(OUT, job.file);
   await page.pdf({
