@@ -1,12 +1,18 @@
 import { FileDown } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { pdfFiles } from "@/lib/pdfs";
+import { type PdfFile } from "@/lib/pdfs";
 import { cn } from "@/lib/utils";
 
-export function PdfDownloads({ className }: { className?: string }) {
+export function PdfDownloads({
+  files,
+  className,
+}: {
+  files: readonly PdfFile[];
+  className?: string;
+}) {
   return (
     <div className={cn("grid gap-3 sm:grid-cols-2", className)}>
-      {pdfFiles.map((file) => (
+      {files.map((file) => (
         <a
           key={file.slug}
           href={file.href}

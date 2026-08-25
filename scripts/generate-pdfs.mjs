@@ -10,6 +10,10 @@ const jobs = [
   { route: "/pdf/teacher", file: "maphteach-moreh.pdf" },
   { route: "/pdf/sheets", file: "dapey-teud.pdf" },
   { route: "/pdf/lesson", file: "maarach-shiur.pdf" },
+  { route: "/pdf/review/students", file: "kartisiyot-hazarah.pdf" },
+  { route: "/pdf/review/teacher", file: "maphteach-hazarah.pdf" },
+  { route: "/pdf/review/sheets", file: "darkon-hazarah.pdf" },
+  { route: "/pdf/review/lesson", file: "maarach-hazarah.pdf" },
 ];
 
 fs.mkdirSync(OUT, { recursive: true });

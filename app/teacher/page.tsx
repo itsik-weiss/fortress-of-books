@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 export default function TeacherPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <p className="text-sm font-semibold text-teal-800">למורה</p>
+      <p className="text-sm font-semibold text-teal-800">למורה · מסלול חקירה</p>
       <h1 className="mt-1 font-heading text-3xl font-bold">
-        מערך שיעור · מבצר המספרים
+        מערך שיעור · חקירה ורמות חשיבה
       </h1>
       <p className="mt-3 leading-8 text-stone-700">
         שיעור חקר לכיתות ג׳–ד׳, כ-45–50 דקות. הכיתה מתחלקת ל-5 קבוצות של 4
@@ -128,6 +128,12 @@ export default function TeacherPage() {
           className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
         >
           להורדת PDF
+        </Link>
+        <Link
+          href="/review/teacher"
+          className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
+        >
+          למערך החזרה
         </Link>
       </div>
     </div>

@@ -2,8 +2,9 @@ import Link from "next/link";
 import { Castle } from "lucide-react";
 
 const links = [
+  { href: "/stations", label: "חקירה" },
+  { href: "/review", label: "חזרה" },
   { href: "/cards", label: "כרטיסיות" },
-  { href: "/stations", label: "תחנות" },
   { href: "/teacher", label: "מערך שיעור" },
   { href: "/print", label: "הדפסה" },
 ];

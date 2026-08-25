@@ -5,21 +5,22 @@ import {
   CardExplorer,
   parseCardQuery,
 } from "@/components/card-explorer";
+import { ReviewNav } from "@/components/review-nav";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
-  cardsForStation,
-  levelLabels,
-  stations,
-  type StationId,
-} from "@/lib/cards";
+  reviewCardsForStation,
+  reviewLevelLabels,
+  reviewStations,
+  type ReviewStationId,
+} from "@/lib/review-cards";
 import { cn } from "@/lib/utils";
 
 export function generateStaticParams() {
-  return stations.map((station) => ({ id: station.id }));
+  return reviewStations.map((station) => ({ id: station.id }));
 }
 
-export default async function StationPage({
+export default async function ReviewStationPage({
   params,
   searchParams,
 }: {
@@ -28,26 +29,27 @@ export default async function StationPage({
 }) {
   const { id } = await params;
   const query = parseCardQuery(await searchParams);
-  const station = stations.find((item) => item.id === id);
+  const station = reviewStations.find((item) => item.id === id);
   if (!station) notFound();
 
-  const pack = cardsForStation(station.id as StationId);
+  const pack = reviewCardsForStation(station.id as ReviewStationId);
 
   return (
     <div className={cn("min-h-full bg-gradient-to-b", station.soft)}>
       <div className="mx-auto max-w-6xl px-4 py-8">
+        <ReviewNav current="/review/stations" />
         <Link
-          href="/stations"
+          href="/review/stations"
           className="text-sm font-medium text-stone-600 hover:text-stone-900"
         >
-          ← כל התחנות
+          ← כל תחנות הפארק
         </Link>
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <Badge className={cn("rounded-full border-0 text-white", station.color)}>
             {station.shortName}
           </Badge>
           <Badge variant="secondary" className="rounded-full">
-            5 כרטיסיות · 4 תלמידים
+            5 כרטיסיות · 5 תלמידים
           </Badge>
         </div>
         <h1 className="mt-3 font-heading text-3xl font-bold">{station.name}</h1>
@@ -60,15 +62,15 @@ export default async function StationPage({
         </p>
         <div className="mt-8">
           <CardExplorer
-            cards={asFlipCards(pack, stations, levelLabels)}
+            cards={asFlipCards(pack, reviewStations, reviewLevelLabels)}
             index={query.index}
             showAnswer={query.showAnswer}
-            basePath={`/stations/${station.id}`}
+            basePath={`/review/stations/${station.id}`}
           />
         </div>
         <div className="mt-10 flex justify-center">
           <Link
-            href="/print"
+            href="/review/print"
             className={cn(buttonVariants({ variant: "outline" }))}
           >
             להדפסת כרטיסיות התחנה

@@ -15,9 +15,9 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "מבצר המספרים · כרטיסיות חקירה",
+  title: "מבצר המספרים · חקירה וחזרה",
   description:
-    "25 כרטיסיות עבודה קבוצתיות לכיתות ג׳–ד׳ על ערך הספרה וחוקיות זוגי ואי-זוגי בחיבור ובכפל.",
+    "שני מסלולי עבודה בקבוצות לכיתות ג׳–ד׳: חקירה ברמות חשיבה, ופארק אתגרים לשימור ידע על מבנה עשרוני.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

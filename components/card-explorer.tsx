@@ -3,8 +3,59 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { splitLines } from "@/lib/format";
-import { getStation, levelLabels, type WorkCard } from "@/lib/cards";
 import { cn } from "@/lib/utils";
+
+export type FlipCard = {
+  id: number;
+  title: string;
+  emoji: string;
+  prompt: string;
+  answer: string;
+  hint: string;
+  stationName: string;
+  stationBadge: string;
+  stationSoft: string;
+  levelLabel: string;
+};
+
+export function asFlipCards<S extends string, L extends string>(
+  cards: Array<{
+    id: number;
+    title: string;
+    emoji: string;
+    prompt: string;
+    answer: string;
+    hint: string;
+    station: S;
+    level: L;
+  }>,
+  stations: Array<{
+    id: S;
+    shortName: string;
+    badge: string;
+    soft: string;
+  }>,
+  labels: Record<L, string>,
+): FlipCard[] {
+  return cards.map((card) => {
+    const station = stations.find((item) => item.id === card.station);
+    if (!station) {
+      throw new Error(`Unknown station on card ${card.id}: ${card.station}`);
+    }
+    return {
+      id: card.id,
+      title: card.title,
+      emoji: card.emoji,
+      prompt: card.prompt,
+      answer: card.answer,
+      hint: card.hint,
+      stationName: station.shortName,
+      stationBadge: station.badge,
+      stationSoft: station.soft,
+      levelLabel: labels[card.level],
+    };
+  });
+}
 
 export function CardExplorer({
   cards,
@@ -12,7 +63,7 @@ export function CardExplorer({
   showAnswer,
   basePath,
 }: {
-  cards: WorkCard[];
+  cards: FlipCard[];
   index: number;
   showAnswer: boolean;
   basePath: string;
@@ -27,19 +78,18 @@ export function CardExplorer({
 
   const safeIndex = Math.min(Math.max(index, 0), cards.length - 1);
   const card = cards[safeIndex];
-  const station = getStation(card.station);
   const query = (nextIndex: number, answer: boolean) =>
     `${basePath}?i=${nextIndex}${answer ? "&side=a" : ""}`;
 
   return (
     <div className="mx-auto w-full max-w-2xl">
       <div className="mb-3 flex items-center justify-between gap-2 text-sm">
-        <Badge className={cn("rounded-full border-0", station.badge)}>
-          {station.shortName}
+        <Badge className={cn("rounded-full border-0", card.stationBadge)}>
+          {card.stationName}
         </Badge>
         <div className="flex items-center gap-2">
           <Badge variant="secondary" className="rounded-full">
-            {levelLabels[card.level]}
+            {card.levelLabel}
           </Badge>
           <span className="text-muted-foreground">
             {safeIndex + 1} מתוך {cards.length}
@@ -52,7 +102,7 @@ export function CardExplorer({
           "min-h-[340px] rounded-[28px] border p-6 shadow-[0_18px_50px_-24px_rgba(15,80,70,0.45)] sm:min-h-[380px] sm:p-8",
           showAnswer
             ? "border-teal-200 bg-white"
-            : `border-stone-200 bg-gradient-to-br ${station.soft}`,
+            : `border-stone-200 bg-gradient-to-br ${card.stationSoft}`,
         )}
       >
         {showAnswer ? (
