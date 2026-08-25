@@ -135,6 +135,12 @@ export default function TeacherPage() {
         >
           למערך החזרה
         </Link>
+        <Link
+          href="/summary/teacher"
+          className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
+        >
+          למערך הסיכום
+        </Link>
       </div>
     </div>
   );

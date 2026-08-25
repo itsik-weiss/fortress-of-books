@@ -37,6 +37,11 @@ export default async function ReviewPrintPage({
           <Link href="/print" className="font-medium text-teal-800 underline">
             הדפסת החקירה
           </Link>
+          {" · "}
+          לסיכום עברו ל
+          <Link href="/summary/print" className="font-medium text-teal-800 underline">
+            הדפסת קיר הסיכום
+          </Link>
           .
         </p>
         <PdfDownloads files={reviewPdfFiles} className="mt-6" />

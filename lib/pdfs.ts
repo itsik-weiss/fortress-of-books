@@ -77,4 +77,39 @@ export const reviewPdfFiles: PdfFile[] = [
   },
 ];
 
+export const summaryPdfFiles: PdfFile[] = [
+  {
+    slug: "kartisiyot-sikom",
+    href: "/pdfs/kartisiyot-sikom.pdf",
+    title: "סיכום · כרטיסיות לתלמידים",
+    description: "25 משימות ניסוח, הוכחה ופרסום — בלי תשובות.",
+    downloadName: "סיכום-כרטיסיות-לתלמידים.pdf",
+    route: "/pdf/summary/students",
+  },
+  {
+    slug: "maphteach-sikom",
+    href: "/pdfs/maphteach-sikom.pdf",
+    title: "סיכום · מפתח למורה",
+    description: "כל משימות הסיכום עם רמזים ותשובות לדוגמה.",
+    downloadName: "סיכום-מפתח-למורה.pdf",
+    route: "/pdf/summary/teacher",
+  },
+  {
+    slug: "totzar-sikom",
+    href: "/pdfs/totzar-sikom.pdf",
+    title: "סיכום · דפי תוצר וקיר",
+    description: "דף תוצר לכל תחנה, פתק יציאה ותבנית לקיר הכיתה.",
+    downloadName: "סיכום-דפי-תוצר.pdf",
+    route: "/pdf/summary/sheets",
+  },
+  {
+    slug: "maarach-sikom",
+    href: "/pdfs/maarach-sikom.pdf",
+    title: "סיכום · מערך שיעור",
+    description: "סיכום דרך עבודה: ניסוח, גלריה וקיר כיתה.",
+    downloadName: "סיכום-מערך-שיעור.pdf",
+    route: "/pdf/summary/lesson",
+  },
+];
+
 export const pdfFiles = inquiryPdfFiles;

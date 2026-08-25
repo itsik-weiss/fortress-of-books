@@ -4,6 +4,7 @@ import { Castle } from "lucide-react";
 const links = [
   { href: "/stations", label: "חקירה" },
   { href: "/review", label: "חזרה" },
+  { href: "/summary", label: "סיכום" },
   { href: "/cards", label: "כרטיסיות" },
   { href: "/teacher", label: "מערך שיעור" },
   { href: "/print", label: "הדפסה" },

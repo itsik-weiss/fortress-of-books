@@ -126,10 +126,10 @@ export default function ReviewTeacherPage() {
           להורדת PDF
         </Link>
         <Link
-          href="/teacher"
+          href="/summary/teacher"
           className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
         >
-          למערך החקירה
+          למערך הסיכום
         </Link>
       </div>
     </div>

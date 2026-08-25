@@ -1,11 +1,16 @@
 import Link from "next/link";
-import { BookOpen, Printer, Sparkles, Users } from "lucide-react";
+import { BookOpen, Landmark, Printer, Sparkles, Users } from "lucide-react";
 import { PdfDownloads } from "@/components/pdf-downloads";
 import { buttonVariants } from "@/components/ui/button";
 import { StationPreview } from "@/components/station-preview";
 import { cards, cardsForStation, stations } from "@/lib/cards";
-import { inquiryPdfFiles, reviewPdfFiles } from "@/lib/pdfs";
+import { inquiryPdfFiles, reviewPdfFiles, summaryPdfFiles } from "@/lib/pdfs";
 import { reviewCards, reviewCardsForStation, reviewStations } from "@/lib/review-cards";
+import {
+  summaryCards,
+  summaryCardsForStation,
+  summaryStations,
+} from "@/lib/summary-cards";
 import { cn } from "@/lib/utils";
 
 export default function HomePage() {
@@ -16,20 +21,20 @@ export default function HomePage() {
         <div className="pointer-events-none absolute -end-16 top-24 size-72 rounded-full bg-teal-200/50 blur-3xl" />
         <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
           <p className="text-sm font-semibold tracking-wide text-teal-800">
-            כיתות ג׳–ד׳ · שני מסלולי עבודה בקבוצות
+            כיתות ג׳–ד׳ · שלושה מסלולי עבודה בקבוצות
           </p>
           <h1 className="mt-3 max-w-3xl font-heading text-4xl font-extrabold leading-tight text-stone-900 sm:text-5xl">
             מבצר המספרים
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-stone-700">
-            ערכה אחת, שני סוגי שיעורים: חקירה שמקדמת רמות חשיבה, ופארק אתגרים
-            לשימור ידע, חזרה ושינון במשימות חווייתיות.
+            ערכה אחת, שלושה סוגי שיעורים: חקירה שמקדמת רמות חשיבה, פארק אתגרים
+            לשימור ידע, וסיכום שהכיתה מייצרת בעצמה ותולה על הקיר.
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-3">
           <article className="rounded-[32px] border border-teal-200 bg-gradient-to-br from-teal-50 to-emerald-50 p-6 shadow-sm">
             <p className="text-sm font-semibold text-teal-800">מסלול 1 · רמות חשיבה</p>
             <h2 className="mt-2 font-heading text-2xl font-bold text-stone-900">
@@ -40,7 +45,7 @@ export default function HomePage() {
               ערך הספרה לפי מקומה. לא חושפים את החוק — מסיקים אותו.
             </p>
             <p className="mt-2 text-sm text-stone-600">
-              {cards.length} כרטיסיות · שלוש רמות: זיהוי, חקירה, הסקת מסקנות
+              {cards.length} כרטיסיות · זיהוי, חקירה, הסקת מסקנות
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               <Link href="/stations" className={cn(buttonVariants())}>
@@ -60,11 +65,11 @@ export default function HomePage() {
               חזרה, שינון ויישום
             </h2>
             <p className="mt-3 leading-7 text-stone-700">
-              פארק אתגרים מתמטי: קזינו ספרות, זירת בלשים, חנות שטרות, מסלול
-              קפיצות עשרוני וסדנת ממציאים. משימות חווייתיות ליישום החומר.
+              פארק אתגרים: קזינו ספרות, זירת בלשים, חנות שטרות, מסלול קפיצות
+              וסדנת ממציאים. משימות חווייתיות ליישום החומר.
             </p>
             <p className="mt-2 text-sm text-stone-600">
-              {reviewCards.length} כרטיסיות · 5 תלמידים בתחנה · 7 דקות לסבב
+              {reviewCards.length} כרטיסיות · 5 תלמידים · 7 דקות לסבב
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               <Link href="/review" className={cn(buttonVariants())}>
@@ -77,6 +82,33 @@ export default function HomePage() {
               >
                 <BookOpen data-icon="inline-start" />
                 כרטיסיות חזרה
+              </Link>
+            </div>
+          </article>
+
+          <article className="rounded-[32px] border border-indigo-200 bg-gradient-to-br from-indigo-50 to-slate-50 p-6 shadow-sm">
+            <p className="text-sm font-semibold text-indigo-800">מסלול 3 · דרך עבודה</p>
+            <h2 className="mt-2 font-heading text-2xl font-bold text-stone-900">
+              סיכום שהכיתה כותבת
+            </h2>
+            <p className="mt-3 leading-7 text-stone-700">
+              ספר חוקים, מפת בתים, גשר בין הנושאים, ועדת מומחים וקיר כיתה. המורה
+              לא כותבת את הסיכום — הקבוצות תולות אותו.
+            </p>
+            <p className="mt-2 text-sm text-stone-600">
+              {summaryCards.length} כרטיסיות · ניסוח, הוכחה, פרסום
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              <Link href="/summary" className={cn(buttonVariants())}>
+                <Landmark data-icon="inline-start" />
+                קיר הסיכום
+              </Link>
+              <Link
+                href="/summary/cards"
+                className={cn(buttonVariants({ variant: "outline" }))}
+              >
+                <BookOpen data-icon="inline-start" />
+                כרטיסיות סיכום
               </Link>
             </div>
           </article>
@@ -145,6 +177,38 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-8">
+        <div className="mb-5 flex items-end justify-between gap-4">
+          <div>
+            <h2 className="font-heading text-2xl font-bold">קיר הסיכום · דרך עבודה</h2>
+            <p className="mt-1 text-stone-600">
+              חמש תחנות ניסוח והוכחה. בסוף השיעור תלוי על הקיר סיכום שהכיתה כתבה.
+            </p>
+          </div>
+          <Link
+            href="/summary/teacher"
+            className={cn(buttonVariants({ variant: "ghost" }))}
+          >
+            למערך הסיכום
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {summaryStations.map((station) => (
+            <StationPreview
+              key={station.id}
+              href={`/summary/stations/${station.id}`}
+              shortName={station.shortName}
+              description={station.description}
+              color={station.color}
+              badge={station.badge}
+              soft={station.soft}
+              cardCount={summaryCardsForStation(station.id).length}
+              groupLabel="4 תלמידים"
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 pb-8">
         <div className="mb-5">
           <h2 className="font-heading text-2xl font-bold">PDF · מסלול החקירה</h2>
           <p className="mt-1 text-stone-600">כרטיסיות, מפתח, דפי תיעוד ומערך שיעור.</p>
@@ -152,20 +216,30 @@ export default function HomePage() {
         <PdfDownloads files={inquiryPdfFiles} />
       </section>
 
+      <section className="mx-auto max-w-6xl px-4 pb-8">
+        <div className="mb-5">
+          <h2 className="font-heading text-2xl font-bold">PDF · מסלול החזרה</h2>
+          <p className="mt-1 text-stone-600">
+            כרטיסיות חווייתיות, מפתח, דרכון תחנות ומערך פארק האתגרים.
+          </p>
+        </div>
+        <PdfDownloads files={reviewPdfFiles} />
+      </section>
+
       <section className="mx-auto max-w-6xl px-4 pb-16">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
-            <h2 className="font-heading text-2xl font-bold">PDF · מסלול החזרה</h2>
+            <h2 className="font-heading text-2xl font-bold">PDF · מסלול הסיכום</h2>
             <p className="mt-1 text-stone-600">
-              כרטיסיות חווייתיות, מפתח, דרכון תחנות ומערך פארק האתגרים.
+              כרטיסיות ניסוח, מפתח, דפי תוצר לקיר ומערך שיעור.
             </p>
           </div>
-          <Link href="/print" className={cn(buttonVariants({ variant: "ghost" }))}>
+          <Link href="/summary/print" className={cn(buttonVariants({ variant: "ghost" }))}>
             <Printer data-icon="inline-start" />
-            כל ההדפסות
+            הדפסת הסיכום
           </Link>
         </div>
-        <PdfDownloads files={reviewPdfFiles} />
+        <PdfDownloads files={summaryPdfFiles} />
       </section>
     </div>
   );

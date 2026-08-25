@@ -14,6 +14,10 @@ const jobs = [
   { route: "/pdf/review/teacher", file: "maphteach-hazarah.pdf" },
   { route: "/pdf/review/sheets", file: "darkon-hazarah.pdf" },
   { route: "/pdf/review/lesson", file: "maarach-hazarah.pdf" },
+  { route: "/pdf/summary/students", file: "kartisiyot-sikom.pdf" },
+  { route: "/pdf/summary/teacher", file: "maphteach-sikom.pdf" },
+  { route: "/pdf/summary/sheets", file: "totzar-sikom.pdf" },
+  { route: "/pdf/summary/lesson", file: "maarach-sikom.pdf" },
 ];
 
 fs.mkdirSync(OUT, { recursive: true });
